@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+SS_DIR="${SHARE_SS_DIR:-$HOME/Dropbox/img/ss}"
+SNAP_NOTIFY_MSG="${SNAP_NOTIFY_MSG:-upload complete}"
+SNAP_NOTIFY_TITLE="${SNAP_NOTIFY_TITLE:-snap}"
+SNAP_NOTIFY_ICON="${SNAP_NOTIFY_ICON:-dialog-information}"
+SNAP_NOTIFY_TIMEOUT="${SNAP_NOTIFY_TIMEOUT:-3000}"
+export SHARE_SS_DIR="$SS_DIR"
+
+scrot "${SS_DIR}/%b%d-%H%M%S.png" "$@"
+share_last_ss | xclip
+notify-send "${SNAP_NOTIFY_TITLE}" \
+            "${SNAP_NOTIFY_MSG}" \
+            -t "${SNAP_NOTIFY_TIMEOUT}" \
+            "--icon=${SNAP_NOTIFY_ICON}"
