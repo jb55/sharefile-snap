@@ -8,7 +8,7 @@ export SHARE_SS_DIR="$SS_DIR"
 
 PNG="${SS_DIR}/%b%d-%H%M%S.png"
 maim "$@" > "$PNG"
-hashshare "$PNG" "$@" | xclip
+hashshare "$PNG" | xclip
 notify-send "${SNAP_NOTIFY_TITLE}" \
             "${SNAP_NOTIFY_MSG}" \
             -t "${SNAP_NOTIFY_TIMEOUT}" \
