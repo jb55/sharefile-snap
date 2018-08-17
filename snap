@@ -6,7 +6,7 @@ SNAP_NOTIFY_ICON="${SNAP_NOTIFY_ICON:-dialog-information}"
 SNAP_NOTIFY_TIMEOUT="${SNAP_NOTIFY_TIMEOUT:-3000}"
 export SHARE_SS_DIR="$SS_DIR"
 
-PNG="${SS_DIR}/%b%d-%H%M%S.png"
+PNG="${SS_DIR}/$(date +'%b%d-%H%M%S').png"
 maim "$@" > "$PNG"
 hashshare "$PNG" | xclip
 notify-send "${SNAP_NOTIFY_TITLE}" \
