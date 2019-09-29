@@ -6,9 +6,22 @@ SNAP_NOTIFY_ICON="${SNAP_NOTIFY_ICON:-dialog-information}"
 SNAP_NOTIFY_TIMEOUT="${SNAP_NOTIFY_TIMEOUT:-3000}"
 export SHARE_SS_DIR="$SS_DIR"
 
+if [ "$1" == "-n" ]; then
+    UPLOAD=0
+    shift
+else
+    UPLOAD=1
+fi
+
 PNG="${SS_DIR}/$(date +'%b%d-%H%M%S').png"
 maim "$@" > "$PNG"
-hashshare "$PNG" | xclip
+
+if [ $UPLOAD -eq 1 ]; then
+    hashshare "$PNG" | xclip
+else
+    echo "$PNG" | xclip
+fi
+
 notify-send "${SNAP_NOTIFY_TITLE}" \
             "${SNAP_NOTIFY_MSG}" \
             -t "${SNAP_NOTIFY_TIMEOUT}" \
