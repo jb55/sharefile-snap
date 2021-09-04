@@ -5,12 +5,12 @@
 , maim ? nixpkgs.maim
 , libnotify ? nixpkgs.libnotify
 , makeWrapper ? nixpkgs.makeWrapper
-, lib
+, lib ? nixpkgs.lib
 }:
 
 let inputs = [ sharefile maim libnotify ];
     buildPaths = sep: fmt:
-      "${stdenv.lib.concatStringsSep sep (map fmt inputs)}";
+      "${lib.concatStringsSep sep (map fmt inputs)}";
 in stdenv.mkDerivation rec {
   pname = "snap";
   version = "1.3";
