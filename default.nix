@@ -5,13 +5,14 @@
 , maim ? nixpkgs.maim
 , libnotify ? nixpkgs.libnotify
 , makeWrapper ? nixpkgs.makeWrapper
+, lib
 }:
 
 let inputs = [ sharefile maim libnotify ];
     buildPaths = sep: fmt:
       "${stdenv.lib.concatStringsSep sep (map fmt inputs)}";
 in stdenv.mkDerivation rec {
-  name = "snap-${version}";
+  pname = "snap";
   version = "1.3";
 
   src = ./.;
@@ -26,7 +27,7 @@ in stdenv.mkDerivation rec {
       --prefix PATH : "${buildPaths ":" (f: "${f}/bin")}"
   '';
 
-  meta = with stdenv.lib; {
+  meta = with lib; {
     description = "quick upload via sharefile";
     homepage = "https://github.com/jb55/snap";
     maintainers = with maintainers; [ jb55 ];
